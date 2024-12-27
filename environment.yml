@@ -1,0 +1,11 @@
+name: django-pgcron
+channels:
+  - conda-forge
+dependencies:
+  - python=3.13
+  - uv==0.5.11
+  - postgresql==17.2
+  - make
+variables:
+  DATABASE_URL: "postgres://postgres@localhost:5432/pgcron_local"
+  EXEC_WRAPPER: ""
