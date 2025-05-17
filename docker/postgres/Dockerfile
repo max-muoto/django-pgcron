@@ -24,4 +24,4 @@ RUN curl -L https://github.com/citusdata/pg_cron/archive/v1.6.4.tar.gz | tar xz 
 RUN apk del git make gcc clang llvm musl-dev postgresql${PG_VERSION}-dev
 
 COPY init-pgcron.sh /docker-entrypoint-initdb.d/
-RUN chmod +x /docker-entrypoint-initdb.d/init-pgcron.sh 
+RUN chmod +x /docker-entrypoint-initdb.d/init-pgcron.sh
