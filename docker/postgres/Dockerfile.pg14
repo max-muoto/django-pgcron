@@ -1,7 +1,4 @@
-# This is a symlink-like file to maintain backward compatibility
-# Use Dockerfile.pg14 or Dockerfile.pg17 directly for specific versions
-
-FROM postgres:17-alpine
+FROM postgres:14-alpine
 
 # Install everything needed, including clang/llvm
 RUN apk add --no-cache \
@@ -11,7 +8,7 @@ RUN apk add --no-cache \
       clang \
       llvm \
       musl-dev \
-      postgresql17-dev \
+      postgresql14-dev \
       curl
 
 # Build pg_cron
@@ -23,7 +20,7 @@ RUN curl -L https://github.com/citusdata/pg_cron/archive/v1.6.4.tar.gz | tar xz 
     rm -rf pg_cron-1.6.4
 
 # remove build tools to reduce image size
-RUN apk del git make gcc clang llvm musl-dev postgresql17-dev
+RUN apk del git make gcc clang llvm musl-dev postgresql14-dev
 
 COPY init-pgcron.sh /docker-entrypoint-initdb.d/
 RUN chmod +x /docker-entrypoint-initdb.d/init-pgcron.sh 

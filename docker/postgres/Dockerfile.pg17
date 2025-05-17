@@ -1,6 +1,3 @@
-# This is a symlink-like file to maintain backward compatibility
-# Use Dockerfile.pg14 or Dockerfile.pg17 directly for specific versions
-
 FROM postgres:17-alpine
 
 # Install everything needed, including clang/llvm
