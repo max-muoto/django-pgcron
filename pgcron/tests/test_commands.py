@@ -4,7 +4,6 @@ import pytest
 from django.core import management
 
 import pgcron
-import pgcron._jobs
 from pgcron import _registry
 from pgcron.models import Job
 

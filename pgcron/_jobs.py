@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import dataclasses
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Final
 
 from django.conf import settings
 from django.db import connections
@@ -18,7 +18,7 @@ if TYPE_CHECKING:
 
     from pgcron.expressions import Expression
 
-JOB_NAME_PREFIX = "pgcron_v1__"
+JOB_NAME_PREFIX: Final = "pgcron_v1__"
 """Prefix for pgcron jobs."""
 
 
