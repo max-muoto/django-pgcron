@@ -11,4 +11,7 @@ def get_database() -> str:
     The database which `pgcron` is installed for,
     will be used as the default database for jobs.
     """
-    return getattr(settings, "PGCRON_DATABASE", db.DEFAULT_DB_ALIAS)
+    database = getattr(settings, "PGCRON_DATABASE", db.DEFAULT_DB_ALIAS)
+    if not isinstance(database, str):
+        raise TypeError("PGCRON_DATABASE must be a string.")
+    return database
