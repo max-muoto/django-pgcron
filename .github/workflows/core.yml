@@ -13,6 +13,7 @@ jobs:
     strategy:
       matrix:
         python-version: ["3.10", "3.11", "3.12", "3.13"]
+        postgres-version: ["14", "17"]
 
     steps:
       - name: Check out code
@@ -31,9 +32,9 @@ jobs:
 
       - name: Spin up DB in background
         run: |
-          docker-compose pull db
-          docker-compose build db
-          docker-compose up -d db
+          PG_VERSION=${{ matrix.postgres-version }} docker-compose pull db
+          PG_VERSION=${{ matrix.postgres-version }} docker-compose build db
+          PG_VERSION=${{ matrix.postgres-version }} docker-compose up -d db
 
       - name: Wait for DB to be ready
         run: |
@@ -64,7 +65,7 @@ jobs:
 
       - name: Stop services
         if: always()
-        run: docker-compose down
+        run: PG_VERSION=${{ matrix.postgres-version }} docker-compose down
         
 
   lint-ruff:

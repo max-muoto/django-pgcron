@@ -5,6 +5,8 @@ services:
     build:
       context: ./docker/postgres
       dockerfile: Dockerfile
+      args:
+        - PG_VERSION=${PG_VERSION:-17}
     volumes:
       - ./.db:/var/lib/postgresql/data
     environment:
