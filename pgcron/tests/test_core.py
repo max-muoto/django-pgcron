@@ -68,7 +68,10 @@ def test_custom_job_name() -> None:
         (pgcron.crontab(hour="*/10"), "* */10 * * *"),
         (pgcron.crontab(day_of_month="*/10"), "* * */10 * *"),
         (pgcron.crontab(month_of_year="*/10"), "* * * */10 *"),
-        (pgcron.crontab(day_of_week="*/10"), "* * * * */10"),
+        # pg_cron >= 1.6.5 rejects steps exceeding the field's maximum value,
+        # and day of week is 0-7. This validation was added in 1.6.5 while
+        # fixing CVE-2024-43688 (https://github.com/citusdata/pg_cron/issues/351).
+        (pgcron.crontab(day_of_week="*/2"), "* * * * */2"),
     ],
 )
 def test_time_delta_schedule(schedule: pgcron.schedule.Schedule, expected_expression: str) -> None:

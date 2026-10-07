@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-import contextlib
-import copy
 from typing import TYPE_CHECKING, Any
 
 import pytest
@@ -14,27 +12,6 @@ from pgcron.tests.models import NameTestModel
 
 if TYPE_CHECKING:
     from collections.abc import Generator
-
-
-@contextlib.contextmanager
-def add_other_database() -> Generator[None]:
-    from django.conf import settings
-
-    original_settings = copy.deepcopy(settings.DATABASES)
-    try:
-        settings.DATABASES["other"] = {
-            "ENGINE": "django.db.backends.postgresql",
-            "NAME": "other",
-            "USER": "postgres",
-            "PASSWORD": "postgres",
-            "HOST": "localhost",
-            "PORT": 5432,
-            "OPTIONS": {"pool": False},
-            "TEST": {"NAME": "other", "MIRROR": "default", "MIGRATE": False},
-        }
-        yield
-    finally:
-        settings.DATABASES = original_settings
 
 
 @pytest.fixture(scope="session", autouse=True)

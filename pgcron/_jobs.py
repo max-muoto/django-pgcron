@@ -84,7 +84,9 @@ class CronJob:
 
     def drop(self) -> None:
         """Drop the job from pgcron."""
-        with connections[self.db_alias].cursor() as cursor:
+        # The `cron` schema only exists in the database where pg_cron is installed in,
+        # which isn't necessarily the database the job runs against.
+        with connections[pgcron._config.get_database()].cursor() as cursor:
             cursor.execute(self.get_drop_sql())
 
     def __eq__(self, other: object) -> bool:
@@ -144,7 +146,9 @@ def unschedule(name: str) -> None:
     """
     from pgcron.models import Job
 
-    Job.objects.filter(jobname=f"{JOB_NAME_PREFIX}{name}").unschedule()
+    Job.objects.using(pgcron._config.get_database()).filter(
+        jobname=f"{JOB_NAME_PREFIX}{name}"
+    ).unschedule()
 
 
 def enable(name: str) -> None:
@@ -155,7 +159,9 @@ def enable(name: str) -> None:
     """
     from pgcron.models import Job
 
-    Job.objects.filter(jobname=f"{JOB_NAME_PREFIX}{name}").enable()
+    Job.objects.using(pgcron._config.get_database()).filter(
+        jobname=f"{JOB_NAME_PREFIX}{name}"
+    ).enable()
 
 
 def disable(name: str) -> None:
@@ -166,4 +172,6 @@ def disable(name: str) -> None:
     """
     from pgcron.models import Job
 
-    Job.objects.filter(jobname=f"{JOB_NAME_PREFIX}{name}").disable()
+    Job.objects.using(pgcron._config.get_database()).filter(
+        jobname=f"{JOB_NAME_PREFIX}{name}"
+    ).disable()

@@ -32,7 +32,7 @@ my_django_project/
 │   └── ...
 ```
 
-Defining your jobs is as simple as decorating a function returning with `@pgcron.job`. Three types of jobs are supported: `pgcron.Update`, `pgcron.Delete`, and `pgcron.SQLExpression`.
+Defining your jobs is as simple as decorating a function returning with `@pgcron.job`. Three types of jobs are supported: `pgcron.Update`, `pgcron.Delete`, and `pgcron.SQLExpression`. The `database` argument selects which database the job runs in, see [Multiple databases](#multiple-databases).
 
 
 ### Update
@@ -71,6 +71,12 @@ def my_job():
     return pgcron.SQLExpression("INSERT INTO my_table (name) VALUES ('test');")
 ```
 
+### Schedules
+
+`@pgcron.job` takes a crontab expression as a string, or a `pgcron.seconds(n)` interval for jobs that run every n seconds (1-59).
+
+Schedule expressions are passed to `pg_cron` as-is and validated by the server. See the [pg_cron documentation](https://github.com/citusdata/pg_cron#cron-syntax) for the supported syntax. Note that `pg_cron` >= 1.6.5 rejects step values larger than a field's maximum, for example `* * * * */10` is invalid because day of week is 0-7. This validation was added in pg_cron 1.6.5 while fixing the CVE-2024-43688 cron parser underflow (https://github.com/citusdata/pg_cron/issues/351).
+
 ### Syncing Jobs
 
 Once you've defined your jobs, you can sync them to the database with the `pgcron sync` command.
@@ -93,10 +99,45 @@ pip install django-pgcron
 
 ### Installing `pg_cron`
 
-In order to use `django-pgcron`, you must have `pg_cron` installed in your database.
+In order to use `django-pgcron`, you must have `pg_cron` installed in the database it manages jobs from (by default, your default database; override with `PGCRON_DATABASE` in settings, see [Multiple databases](#multiple-databases)).
+
+Note that `pg_cron` can only be installed in a single database per cluster, but jobs can still be scheduled to run against other databases.
 
 For instructions on installing `pg_cron`, see the [pg_cron documentation](https://github.com/citusdata/pg_cron?tab=readme-ov-file#installing-pg_cron). 
 
+
+## Multiple databases
+
+By default, all jobs run in the database `pg_cron` is installed in. To run a job against a different database on the same server, pass the `database` argument to `pgcron.job`:
+
+```python
+import pgcron
+
+@pgcron.job("0 0 * * *", database="analytics")
+def nightly_vacuum():
+    return pgcron.SQLExpression("VACUUM;")
+```
+
+`database` is a `DATABASES` alias. The target database must exist, and the user that schedules the job needs `CONNECT` privilege on it.
+
+If `pg_cron` is installed in a database other than your default one, point `PGCRON_DATABASE` at it:
+
+```python
+# settings.py
+DATABASES = {
+    "default": {...},
+    "pgcron": {...},  # the database where `CREATE EXTENSION pg_cron` was run
+}
+PGCRON_DATABASE = "pgcron"
+```
+
+The `cron` schema only exists in that database, so all job management (`pgcron sync`, `pgcron ls`, enabling, disabling, dropping) happens there, regardless of which database a job runs against. The `Job` and `JobRunDetails` models are pass-throughs for that database's tables; when querying them directly, use the alias explicitly:
+
+```python
+from django.conf import settings
+
+pgcron.models.Job.objects.using(settings.PGCRON_DATABASE).filter(...)
+```
 
 ## Compatibility
 

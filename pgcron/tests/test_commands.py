@@ -27,6 +27,23 @@ def test_sync() -> None:
     assert Job.objects.count() == 0
 
 
+@pytest.mark.django_db(databases=["default", "other"])
+def test_sync_job_in_another_database() -> None:
+    """Test that sync works for jobs running against a database without `pg_cron`."""
+
+    @pgcron.job(pgcron.crontab(), database="other")
+    def test_job():
+        return pgcron.SQLExpression("SELECT 1;")
+
+    management.call_command("pgcron", "sync")
+    assert Job.objects.get().database == "other"
+
+    # Dropping happens through `PGCRON_DATABASE`, the only database with a `cron` schema.
+    _registry.clear()
+    management.call_command("pgcron", "sync")
+    assert Job.objects.count() == 0
+
+
 @pytest.mark.django_db
 def test_ls(capsys: pytest.CaptureFixture[str]) -> None:
     """Test that the ls command works."""
