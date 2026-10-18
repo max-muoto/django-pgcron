@@ -164,7 +164,7 @@ requests==2.34.2
 ruff==0.8.6
 six==1.17.0
     # via python-dateutil
-sqlparse==0.5.1
+sqlparse==0.6.0
     # via django
 stack-data==0.6.3
     # via ipython
