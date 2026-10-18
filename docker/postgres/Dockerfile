@@ -1,12 +1,12 @@
 FROM postgres:17-alpine
 
-# Install everything needed, including clang/llvm
+# Match the Clang/LLVM toolchain used to build the PostgreSQL image.
 RUN apk add --no-cache \
       git \
       make \
       gcc \
-      clang \
-      llvm \
+      clang21 \
+      llvm21 \
       musl-dev \
       postgresql17-dev \
       curl
@@ -20,7 +20,7 @@ RUN curl -L https://github.com/citusdata/pg_cron/archive/v1.6.4.tar.gz | tar xz 
     rm -rf pg_cron-1.6.4
 
 # remove build tools to reduce image size
-RUN apk del git make gcc clang llvm musl-dev postgresql17-dev
+RUN apk del git make gcc clang21 llvm21 musl-dev postgresql17-dev
 
 COPY init-pgcron.sh /docker-entrypoint-initdb.d/
 RUN chmod +x /docker-entrypoint-initdb.d/init-pgcron.sh

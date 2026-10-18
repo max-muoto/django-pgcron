@@ -3,7 +3,7 @@ name = "django-pgcron"
 version = "0.1.0"
 description = "Manage pgcron jobs from Django"
 readme = "README.md"
-requires-python = ">=3.10, <3.14"
+requires-python = ">=3.11, <3.16"
 dependencies = [
     "django>=5.0.0"
 ]
@@ -65,7 +65,7 @@ dev = [
 ]
 
 [tool.ruff]
-target-version = "py310"
+target-version = "py311"
 line-length = 100
 lint.select = [
     "I",       # isort
@@ -128,5 +128,5 @@ exclude = [
     "src/typestubs",
     "**/venv",
 ]
-pythonVersion = "3.10"
+pythonVersion = "3.11"
 typeCheckingMode = "strict"

@@ -65,7 +65,7 @@ def test_job_dunders() -> None:
 
 def test_job_run_details_dunders() -> None:
     """Test the custom dunders for JobRunDetails."""
-    start_time = dt.datetime.now(dt.timezone.utc)
+    start_time = dt.datetime.now(dt.UTC)
     end_time = start_time + dt.timedelta(seconds=3600)
     job_run_details = JobRunDetails(
         runid=1,
@@ -89,7 +89,7 @@ def test_job_run_details_dunders() -> None:
 
 def test_job_run_details_duration() -> None:
     """Test the duration property of JobRunDetails."""
-    start_time = dt.datetime.now(dt.timezone.utc)
+    start_time = dt.datetime.now(dt.UTC)
     end_time = start_time + dt.timedelta(seconds=3600)
     job_run_details = JobRunDetails(
         runid=1,
