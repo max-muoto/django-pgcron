@@ -16,5 +16,4 @@ For instructions on installing `pg_cron`, see the [pg_cron documentation](https:
 
 ## Compatibility
 
-`django-pgcron` is compatible with Python 3.10 - 3.13, Django 5.0+, and Postgres 13 - 17.
-
+`django-pgcron` is compatible with Python 3.11 - 3.15, Django 5.0+, and Postgres 13 - 17.

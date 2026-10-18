@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import dataclasses
+from enum import StrEnum
 from typing import TYPE_CHECKING, Final
 
 from django.conf import settings
@@ -11,7 +12,6 @@ from django.db import connections
 import pgcron
 import pgcron._config
 import pgcron.expressions
-from pgcron import _compat
 
 if TYPE_CHECKING:
     from django.db.backends.utils import CursorWrapper
@@ -22,7 +22,7 @@ JOB_NAME_PREFIX: Final = "pgcron_v1__"
 """Prefix for pgcron jobs."""
 
 
-class Status(_compat.StrEnum):
+class Status(StrEnum):
     """Status of a pgcron job."""
 
     ENABLED = "enabled"
