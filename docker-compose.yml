@@ -5,9 +5,13 @@ services:
     build:
       context: ./docker/postgres
       dockerfile: Dockerfile
+      args:
+        PG_VERSION: ${PG_VERSION:-17}
     volumes:
       - ./.db:/var/lib/postgresql/data
     environment:
+      # Keep the existing mounted data path, including with PostgreSQL 18+.
+      - PGDATA=/var/lib/postgresql/data
       - POSTGRES_DB=postgres
       - POSTGRES_NAME=postgres
       - POSTGRES_USER=postgres

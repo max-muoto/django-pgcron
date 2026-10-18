@@ -9,13 +9,16 @@ on:
 
 jobs:
   build-and-test:
-    name: Python ${{ matrix.python-version }} / Django ${{ matrix.django-version }}
+    name: Python ${{ matrix.python-version }} / Django ${{ matrix.django-version }} / PostgreSQL ${{ matrix.postgres-version }}
     runs-on: ubuntu-latest
+    env:
+      PG_VERSION: ${{ matrix.postgres-version }}
     strategy:
       fail-fast: false
       matrix:
         python-version: ["3.11", "3.12", "3.13", "3.14"]
         django-version: ["5.2", "6.1"]
+        postgres-version: ["18"]
         exclude:
           - python-version: "3.11"
             django-version: "6.1"
@@ -23,6 +26,14 @@ jobs:
           # Forward compatibility: not yet in Django's supported Python matrix.
           - python-version: "3.15"
             django-version: "6.1"
+            postgres-version: "18"
+          # Each Django series has a different minimum PostgreSQL version.
+          - python-version: "3.11"
+            django-version: "5.2"
+            postgres-version: "14"
+          - python-version: "3.12"
+            django-version: "6.1"
+            postgres-version: "15"
 
     steps:
       - name: Check out code
