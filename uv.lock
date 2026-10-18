@@ -396,16 +396,16 @@ wheels = [
 
 [[package]]
 name = "django"
-version = "5.1.1"
+version = "5.2.18"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "asgiref" },
     { name = "sqlparse" },
     { name = "tzdata", marker = "sys_platform == 'win32'" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/88/6f/8f57ed6dc88656edd4fcb35c50dd963f3cd79303bd711fb0160fc7fd6ab7/Django-5.1.1.tar.gz", hash = "sha256:021ffb7fdab3d2d388bc8c7c2434eb9c1f6f4d09e6119010bbb1694dda286bc2", size = 10675933, upload-time = "2024-09-03T14:01:18.699Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/85/fe/79e692b430c7721bf4b812c328bfe687e73e3f28f56611a6a18a97e887cc/django-5.2.18.tar.gz", hash = "sha256:461c5dd06d2ea16bd5ca37d3f46e4def1d6b0fe7588c6f4e2119517bb0af8b2d", size = 10910238, upload-time = "2026-10-06T13:01:09.371Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/ba/aa/b423e37e9ba5480d3fd1d187e3fdbd09f9f71b991468881a45413522ccd3/Django-5.1.1-py3-none-any.whl", hash = "sha256:71603f27dac22a6533fb38d83072eea9ddb4017fead6f67f2562a40402d61c3f", size = 8246418, upload-time = "2024-09-03T14:01:12.448Z" },
+    { url = "https://files.pythonhosted.org/packages/d6/01/6568ec52b26548ca1b83d33249f7274db3bf74698f42c0da42ec9db1a24a/django-5.2.18-py3-none-any.whl", hash = "sha256:92ed81d500be6408ecd704d7bd1366c534f30427bffcc63c5fefb129561aec7c", size = 8316071, upload-time = "2026-10-06T13:01:04.413Z" },
 ]
 
 [[package]]
@@ -447,7 +447,7 @@ dev = [
     { name = "mkdocstrings-python", specifier = ">=1.12.2" },
     { name = "psycopg", extras = ["binary"], specifier = ">=3.2.3" },
     { name = "pyright", specifier = "~=1.1.364" },
-    { name = "pytest", specifier = ">=8.1.1,<9" },
+    { name = "pytest", specifier = ">=9.0.3,<10" },
     { name = "pytest-cov", specifier = ">=6.0.0,<7" },
     { name = "pytest-django", specifier = ">=4.9.0" },
     { name = "ruff", specifier = "~=0.8.4" },
@@ -1115,7 +1115,7 @@ wheels = [
 
 [[package]]
 name = "pytest"
-version = "8.4.2"
+version = "9.1.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "colorama", marker = "sys_platform == 'win32'" },
@@ -1124,9 +1124,9 @@ dependencies = [
     { name = "pluggy" },
     { name = "pygments" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/a3/5c/00a0e072241553e1a7496d638deababa67c5058571567b92a7eaa258397c/pytest-8.4.2.tar.gz", hash = "sha256:86c0d0b93306b961d58d62a4db4879f27fe25513d4b969df351abdddb3c30e01", size = 1519618, upload-time = "2025-09-04T14:34:22.711Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/e4/47/b9efed96c114afcfa3c9d3fe98a76a1d14c74a9e266d397cf6eb64be5e01/pytest-9.1.1.tar.gz", hash = "sha256:1088fbde8f2b49d95a549a195707afa7a76a3ce9bcadc26b6d71f0ffda5fe313", size = 1636369, upload-time = "2026-06-19T10:58:32.857Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/a8/a4/20da314d277121d6534b3a980b29035dcd51e6744bd79075a6ce8fa4eb8d/pytest-8.4.2-py3-none-any.whl", hash = "sha256:872f880de3fc3a5bdc88a11b39c9710c3497a547cfa9320bc3c5e62fbf272e79", size = 365750, upload-time = "2025-09-04T14:34:20.226Z" },
+    { url = "https://files.pythonhosted.org/packages/24/25/1de2678b631f5a49215c6c96fff41ba892b0a34df68d6d80292b1b48aa7f/pytest-9.1.1-py3-none-any.whl", hash = "sha256:37a86b45efb9a47a61a36449063e8e18d0cab3161329fc099eb21783169c4f0c", size = 386536, upload-time = "2026-06-19T10:58:31.347Z" },
 ]
 
 [[package]]
@@ -1319,11 +1319,11 @@ wheels = [
 
 [[package]]
 name = "sqlparse"
-version = "0.5.1"
+version = "0.6.0"
 source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/73/82/dfa23ec2cbed08a801deab02fe7c904bfb00765256b155941d789a338c68/sqlparse-0.5.1.tar.gz", hash = "sha256:bb6b4df465655ef332548e24f08e205afc81b9ab86cb1c45657a7ff173a3a00e", size = 84502, upload-time = "2024-07-15T19:30:27.085Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/5f/d3/3f06a1006f2261d1342aefb3c71eed02f5d4ca5bdbecd86ebc12ad38306e/sqlparse-0.6.0.tar.gz", hash = "sha256:113c35c75365ab9cc9c7231d68c6428fb11c085fc8e9eb1ad659b7ddbf6cd2b9", size = 178477, upload-time = "2026-08-13T19:16:06.396Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/5d/a5/b2860373aa8de1e626b2bdfdd6df4355f0565b47e51f7d0c54fe70faf8fe/sqlparse-0.5.1-py3-none-any.whl", hash = "sha256:773dcbf9a5ab44a090f3441e2180efe2560220203dc2f8c0b0fa141e18b505e4", size = 44156, upload-time = "2024-07-15T19:30:25.033Z" },
+    { url = "https://files.pythonhosted.org/packages/d9/50/f00935da0ec7cbf325f8dc4f772ae46fbc7b672dd62876e73f0a94adda57/sqlparse-0.6.0-py3-none-any.whl", hash = "sha256:b861c0288ce2fa56209a9a6412d2e066ac664b3873b89c26c9d8415e8e32996f", size = 50070, upload-time = "2026-08-13T19:16:04.062Z" },
 ]
 
 [[package]]

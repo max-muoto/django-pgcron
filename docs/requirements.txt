@@ -29,7 +29,7 @@ coverage==7.16.2
 decorator==5.3.1
     # via ipdb
 dj-database-url==3.1.2
-django==5.1.1
+django==5.2.18
     # via
     #   dj-database-url
     #   django-pgcron
@@ -141,7 +141,7 @@ pymdown-extensions==12.3
     #   mkdocs-material
     #   mkdocstrings
 pyright==1.1.414
-pytest==8.4.2
+pytest==9.1.1
     # via
     #   pytest-cov
     #   pytest-django
@@ -164,7 +164,7 @@ requests==2.34.2
 ruff==0.8.6
 six==1.17.0
     # via python-dateutil
-sqlparse==0.5.1
+sqlparse==0.6.0
     # via django
 stack-data==0.6.3
     # via ipython
