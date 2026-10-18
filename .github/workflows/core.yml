@@ -57,26 +57,18 @@ jobs:
         run: |
           docker-compose run --rm app env
 
-      - name: Install test dependencies
-        run: |
-          docker-compose run --rm app \
-            uv sync --locked --python ${{ matrix.python-version }}
-          docker-compose run --rm app \
-            uv pip install --python .venv/bin/python --upgrade 'django==${{ matrix.django-version }}.*'
-
-      - name: Run migrations
+      # Keep uv's downloaded interpreter alive for setup, migrations, and tests.
+      - name: Install dependencies and run tests
         run: |
           docker-compose run --rm \
             -v ${{ github.workspace }}:/app \
             -w /app \
-            app uv run --no-sync --python ${{ matrix.python-version }} python manage.py migrate
-      
-      - name: Run tests
-        run: |
-          docker-compose run --rm \
-            -v ${{ github.workspace }}:/app \
-            -w /app \
-            app uv run --no-sync --python ${{ matrix.python-version }} pytest -s
+            app sh -ec '
+              uv sync --locked --python ${{ matrix.python-version }}
+              uv pip install --python .venv/bin/python --upgrade "django==${{ matrix.django-version }}.*"
+              uv run --no-sync --python ${{ matrix.python-version }} python manage.py migrate
+              uv run --no-sync --python ${{ matrix.python-version }} pytest -s
+            '
     
 
       - name: Stop services
