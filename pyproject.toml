@@ -49,7 +49,7 @@ DJANGO_SETTINGS_MODULE = "settings"
 
 [dependency-groups]
 dev = [
-    "pytest >=8.1.1,<9",
+    "pytest>=9.0.3,<10",
     "pytest-cov>=6.0.0,<7",
     "pyright ~=1.1.364",
     "ruff ~=0.8.4",
